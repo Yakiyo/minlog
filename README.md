@@ -1,39 +1,61 @@
-<!--
-This README describes the package. If you publish this package to pub.dev,
-this README's contents appear on the landing page for your package.
+# Easy Log
 
-For information about how to write a good package README, see the guide for
-[writing package pages](https://dart.dev/tools/pub/writing-package-pages).
+A dart/flutter logging package inspired from the awesome rust based [env_logger](https://crates.io/crates/env_logger). 
 
-For general information about developing packages, see the Dart guide for
-[creating packages](https://dart.dev/guides/libraries/create-packages)
-and the Flutter guide for
-[developing packages and plugins](https://flutter.dev/to/develop-packages).
--->
+## Installation
+```bash
+flutter pub add easy_log
 
-TODO: Put a short description of the package here that helps potential users
-know whether this package might be useful for them.
-
-## Features
-
-TODO: List what your package can do. Maybe include images, gifs, or videos.
-
-## Getting started
-
-TODO: List prerequisites and provide or point to information on how to
-start using the package.
-
-## Usage
-
-TODO: Include short and useful examples for package users. Add longer examples
-to `/example` folder.
-
-```dart
-const like = 'sample';
+dart pub add easy_log
 ```
 
-## Additional information
+## Usage
+The base Logger class is the root of the package. Once instantiated, the logger class can be used to log messages
 
-TODO: Tell users more about the package: where to find more information, how to
-contribute to the package, how to file issues, what response they can expect
-from the package authors, and more.
+```dart
+final logger = Logger(level: Level.warn, writer: StdErrWriter());
+
+logger.info("Info message"); // this wont get printed
+logger.error("Unexpected crash", { // this will get printed
+    "error": "reason of crash", // attach a map of key values that will added to the error log
+    "time": DateTime.now().toString(),
+});
+
+```
+
+The logger's writer determines where the output goes. The package comes with 3 writers, StdErrWriter (which writes to stderr), StdOutWriter (which writes to stdout) and FileWriter (which writes to a File). 
+```dart
+final stdoutw = StdOutWriter();
+final stderrw = StdErrWriter();
+final filew = FileWriter(File("path/to/file.txt"));
+```
+
+There is also a MultiWriter, which takes multiple writers and writes output to all of them. This is useful if you want to write your logs to multiple files or a file and stderr at a time. Custom writers can be written as long as it implements the `Writer` interface, which is essentially a class with a method `void write(String content) {}`. See the documentation for details.
+
+The format of the logger can be changed too. Just pass along a formatter function to the Logger class. See the documentation for the formatter function for more details. The default logger's implementation can be seen at [formatter.dart](lib/src/formatter.dart).
+
+### Default logger
+The package has some global logging functions that can be used to log messages without creating a logger instance. 
+
+```dart
+import 'package:easy_log/easy_log.dart';
+
+void main() {
+    log(Level.info, "Info message");
+    error("Unexpected crash", {
+        "error": "reason of crash",
+        "time": DateTime.now().toString(),
+    });
+}
+```
+
+This global `info`, `error`, `warn`, `debug` and `trace` functions use a default logger instance that can be modified by calling `updateDefaultLogger`. The default logger is a logger with level `Level.info` and a `StdErrWriter`.
+
+
+## License
+
+This project is licensed under the MIT License.
+
+## Contact
+
+For any questions or suggestions, please open an issue on GitHub.
