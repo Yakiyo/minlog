@@ -1,4 +1,4 @@
-library easy_log;
+library minlog;
 
 export 'src/logger.dart';
 export 'src/levels.dart';

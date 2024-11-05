@@ -1,7 +1,7 @@
-name: easy_log
+name: minlog
 description: "Simplified logging for Dart and Flutter"
 version: 0.1.0
-homepage:
+repository: https://github.com/Yakiyo/minlog
 
 environment:
   sdk: ^3.5.3

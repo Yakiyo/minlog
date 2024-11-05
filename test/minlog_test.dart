@@ -4,7 +4,7 @@ import 'dart:io';
 
 import 'package:test/test.dart';
 
-import 'package:easy_log/easy_log.dart';
+import 'package:minlog/minlog.dart';
 
 void main() {
   // in test, the first char in stderr/stdout is not printed

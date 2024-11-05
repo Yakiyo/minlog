@@ -1,12 +1,12 @@
-# Easy Log
+# Minlog
 
 A dart/flutter logging package inspired from the awesome rust based [env_logger](https://crates.io/crates/env_logger). 
 
 ## Installation
 ```bash
-flutter pub add easy_log
+flutter pub add minlog
 
-dart pub add easy_log
+dart pub add minlog
 ```
 
 ## Usage
@@ -38,7 +38,7 @@ The format of the logger can be changed too. Just pass along a formatter functio
 The package has some global logging functions that can be used to log messages without creating a logger instance. 
 
 ```dart
-import 'package:easy_log/easy_log.dart';
+import 'package:minlog/minlog.dart';
 
 void main() {
     log(Level.info, "Info message");

@@ -1,4 +1,7 @@
-import 'package:easy_log/easy_log.dart';
+import 'formatter.dart';
+import 'interface.dart';
+import 'levels.dart';
+import 'logger.dart';
 
 final _logger = Logger(level: Level.warn, writer: StdErrWriter());
 
