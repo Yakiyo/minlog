@@ -5,6 +5,8 @@ abstract interface class Writer {
 }
 
 /// A wrapper around the `File` class from dart:io that implements `Writer`
+/// 
+/// Logs are appended to the file and a newline is added at the end of each log
 class FileWriter implements Writer {
   late final File file;
   FileWriter(this.file);
@@ -16,7 +18,7 @@ class FileWriter implements Writer {
 
   @override
   write(String content) {
-    file.writeAsString(content);
+    file.writeAsString('$content\n', mode: FileMode.append);
   }
 }
 
