@@ -1,6 +1,6 @@
 name: minlog
 description: "Simplified logging for Dart and Flutter"
-version: 0.1.0
+version: 0.1.1
 repository: https://github.com/Yakiyo/minlog
 
 environment:
